@@ -1,11 +1,16 @@
-footer{
-    border-top: 2px solid #3a3a3a;
-}
+
 nav{
     background-color: #3a3a3a;
     color: #ffffff;
     padding: 10px;
+    text-decoration: none;
 }
 nav li{
     display: inline;
+}
+
+
+footer{
+    border-top: 2px solid #3a3a3a;
+    text-align: center;
 }
