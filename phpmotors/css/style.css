@@ -17,8 +17,8 @@ header image{
     color: #3a3a3a;
     font-size: 1.3em;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 25x;
+    right: 25px;
     text-align: right;
 }
 
@@ -35,8 +35,6 @@ nav a{
     font-size: 1.3em;
 }
 nav a:hover{
-    text-decoration: underline;
-    color: #26547C;
     background-color: #4c96d7;
     padding: 10px;
 }
