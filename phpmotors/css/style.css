@@ -8,7 +8,9 @@ body{
     background-color: white;
     margin: 20px;
 }
-
+header image{
+    display: block;
+}
 #login-link
 {
     text-decoration: none;
