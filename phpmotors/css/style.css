@@ -1,6 +1,8 @@
-
-body{
+html{
+    
     background-image: url('/../phpmotors/images/site/small_check.jpg');
+}
+body{
     border: 1px solid #4c96d7;
     background-color: white;
     margin: 20px;
