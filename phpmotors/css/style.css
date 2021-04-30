@@ -18,11 +18,9 @@ body{
 
 nav{
     background-color: #3a3a3a;
-    padding: 10px;
+    padding: 5px;
 }
-nav li{
-    display: inline;
-}
+
 nav a{
     text-decoration: none;
     color: #ffffff;
@@ -45,5 +43,11 @@ footer{
     top: 25px;
     right: 25px;
     text-align: right;
+    }
+    nav{
+        padding: 10px;
+    }
+    nav li{
+        display: inline;
     }
 }
