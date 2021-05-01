@@ -44,7 +44,7 @@ nav ul{
 }
 
 #car-box{
-    color: #4c96d7;
+    color: #1C507d;
     order: 2;
 }
 #car-box p,h3{
@@ -62,7 +62,7 @@ main h1{
 }
 main button{
     color: #3a3a3a;
-    background-color: #4c96d7;
+    background-color: #a6cbeb;
     border: 1px;
     font-size: 1.1em;
     order: 4;

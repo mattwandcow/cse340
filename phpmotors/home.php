@@ -23,7 +23,7 @@ include('structure/nav.php');
             <p>Fuzzy Dice!</p>
         </div>
         <button>Own Today</button>
-        <img src="images/delorean.jpg">
+        <img src="images/delorean.jpg" alt="Delorean Car">
         </div>
         <h2 id="upgrade-heading">Delorean Upgrades</h2>
         <div id="upgrades-box">
