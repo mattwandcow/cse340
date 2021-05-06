@@ -2,17 +2,16 @@
 function createConnection()
 {
 //$server = '0.0.0.0';
+//$server = '127.0.01';
 //lists connection refused, with or without ports
 
-$server = '127.0.01';
-//$server = 'mysql';
+$server = 'mysql:3306';
 $dbname = 'phpmotors';
 $username = 'proxyUser';
 $password = 'proxPASS';
-$port = '3306';
 
-$dsn ='mysql:host='.$server.';port='.$port.';dbname='.$dbname;
-//$dsn ='mysql:host='.$server.';dbname='.$dbname;
+//$dsn ='mysql:host='.$server.';port='.$port.';dbname='.$dbname;
+$dsn ='mysql:host='.$server.';dbname='.$dbname;
 $options = array(PDO::ATTR_ERRMODE=> PDO::ERRMODE_EXCEPTION);
 try{
     $link = new PDO($dsn, $username, $password, $options);
