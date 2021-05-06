@@ -1,7 +1,11 @@
 <?php
 function createConnection()
 {
-$server = 'mysql';
+//$server = '0.0.0.0';
+//lists connection refused, with or without ports
+
+$server = '127.0.01';
+//$server = 'mysql';
 $dbname = 'phpmotors';
 $username = 'proxyUser';
 $password = 'proxPASS';
