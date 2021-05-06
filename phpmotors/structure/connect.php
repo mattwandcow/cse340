@@ -1,7 +1,7 @@
 <?php
 function createConnection()
 {
-$server = 'mysql';
+$server = '0.0.0.0';
 $dbname = 'phpmotors';
 $username = 'proxyUser';
 $password = 'proxPASS';
