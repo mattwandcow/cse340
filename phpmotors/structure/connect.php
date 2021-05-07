@@ -3,7 +3,7 @@ function createConnection()
 {
 
 
-$server = 'mysql';
+$server = 'localhost';
 $dbname = 'phpmotors';
 $username = 'dbuser';
 $password = 'dbpass';
