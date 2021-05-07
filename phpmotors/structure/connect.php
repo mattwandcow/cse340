@@ -1,14 +1,12 @@
 <?php
 function createConnection()
 {
-//$server = '0.0.0.0';
-//$server = '127.0.01';
-//lists connection refused, with or without ports
 
-$server = 'mysql:3306';
+
+$server = 'mysql';
 $dbname = 'phpmotors';
-$username = 'proxyUser';
-$password = 'proxPASS';
+$username = 'dbuser';
+$password = 'dbpass';
 
 //$dsn ='mysql:host='.$server.';port='.$port.';dbname='.$dbname;
 $dsn ='mysql:host='.$server.';dbname='.$dbname;
