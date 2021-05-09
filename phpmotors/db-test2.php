@@ -1,13 +1,13 @@
 <?php
 require_once('structure/connect.php');
-$link=createConnection();
+$link=badConnection();
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
 
 <head>
     <meta charset="utf-8">
-    <title>PHP Motors Connection Test</title>
+    <title>PHP Motors Home</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 

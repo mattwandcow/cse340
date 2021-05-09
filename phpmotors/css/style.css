@@ -1,178 +1,178 @@
 html{
-    
-    background-image: url('/../phpmotors/images/site/small_check.jpg');
+	
+	background-image: url('../images/site/small_check.jpg');
 }
 body{
-    border: 2px solid #4c96d7;
-    border-radius: 15px;
-    background-color: white;
-    margin: 20px;
+	border: 2px solid #4c96d7;
+	border-radius: 15px;
+	background-color: white;
+	margin: 20px;
 }
 header{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
 }
 
 #login-link
 {
-    text-decoration: none;
-    color: #3a3a3a;
-    font-size: 1.3em;
+	text-decoration: none;
+	color: #3a3a3a;
+	font-size: 1.3em;
 }
 
 nav{
-    background-color: #3a3a3a;
-    padding: 5px;
+	background-color: #3a3a3a;
+	padding: 5px;
 }
 nav li{
-    padding: 0px 25px;
-    font-size: 1.3em;
+	padding: 0px 25px;
+	font-size: 1.3em;
 }
 nav a{
-    text-decoration: none;
-    color: #ffffff;
+	text-decoration: none;
+	color: #ffffff;
 }
 nav a:hover{
-    color: #4c96d7;
+	color: #4c96d7;
 }
 nav li{
-    display: inline;
+	display: inline;
 }
 nav ul{
-    padding: 0px;
+	padding: 0px;
 }
 
 #car-box{
-    color: #1C507d;
-    order: 2;
+	color: #1C507d;
+	order: 2;
 }
 #car-box p,h3{
-    margin: 0px;
+	margin: 0px;
 }
-main{
-    display: flex;
-    flex-flow: column;  
-    justify-content: flex-start;
+#main-grid{
+	display: flex;
+	flex-flow: column;  
+	justify-content: flex-start;
 }
 main h1{
-    font-size: 1.6em;
-    order: 1;
-    margin-left: 5px;
+	font-size: 1.6em;
+	order: 1;
+	margin-left: 5px;
 }
 main button{
-    color: #3a3a3a;
-    background-color: #a6cbeb;
-    border: 1px;
-    font-size: 1.1em;
-    order: 4;
-    width: 50%;
-    padding: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    
+	color: #3a3a3a;
+	background-color: #a6cbeb;
+	border: 1px;
+	font-size: 1.1em;
+	order: 4;
+	width: 50%;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
 }
 main img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    order: 3;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+	order: 3;
 }
 
 #upgrades-box{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    order: 6;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	order: 6;
 }
 
 #upgrade-heading{
-    order: 5;
-    margin-bottom: 5px;
-    margin-left: 5px;
+	order: 5;
+	margin-bottom: 5px;
+	margin-left: 5px;
 }
 #review-heading{
-    order: 7;
-    margin-bottom: 0px;
-    margin-left: 5px;
+	order: 7;
+	margin-bottom: 0px;
+	margin-left: 5px;
 }
 #reviews-box{
-    order: 8;
+	order: 8;
 }
 .upgrade-container{
-    flex-basis: 45%;
-    text-align: center;
+	flex-basis: 45%;
+	text-align: center;
 }
 .upgrade-image-padding{
-    border: 1px black solid;
-    background-color: #4c96d7;
-    height: 100px;
+	border: 1px black solid;
+	background-color: #4c96d7;
+	height: 100px;
 }
 
 
 
 
 footer{
-    border-top: 2px solid #3a3a3a;
-    text-align: center;
+	border-top: 2px solid #3a3a3a;
+	text-align: center;
 }
 
 @media (min-width: 500px){
-    /* Largest */
-    nav a:hover{
-        background-color: #4c96d7;
-        padding: 25px;
-        color: black;
-    }
-    nav li{
-        display: inline;
-    }
-    main{
-        display: grid;
-        grid-template-columns: 20px 1fr 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto auto auto 1fr;
-        z-index: 2;
-    }
-    main h1{
-        grid-column: 1/4;
-        grid-row: 1/2;
-        z-index: inherit;
-    }
-    #car-box{
-        grid-column: 2/3;
-        grid-row: 2/3;
-        padding-left: 10px;
-        z-index: inherit;
-    }
-    #review-heading{
-        grid-column: 4/6;
-        grid-row: 5/6;
-    }
-    #reviews-box{
-        grid-column: 4/6;
-        grid-row: 6/7;
-    }
-    #upgrades-box{
-        grid-column: 2/4;
-        grid-row: 6/7;
-    }
-    #upgrade-heading{
-        grid-column: 2/4;
-        grid-row: 5/6;
-    }
-    main img{
-    grid-column: 1/6;
-    grid-row: 2/5;
-    z-index: 1;
-    }
-    main button{
-        grid-column: 2/3;
-        grid-row: 3/4;
-        z-index: inherit;
-        padding: 10px 20px;
-        margin: 5px 10px;
-    }
+	/* Largest */
+	nav a:hover{
+		background-color: #4c96d7;
+		padding: 25px;
+		color: black;
+	}
+	nav li{
+		display: inline;
+	}
+	#main-grid{
+		display: grid;
+		grid-template-columns: 20px 1fr 1fr 1fr 1fr;
+		grid-template-rows: auto auto auto auto auto 1fr;
+		z-index: 2;
+	}
+	main h1{
+		grid-column: 1/4;
+		grid-row: 1/2;
+		z-index: inherit;
+	}
+	#car-box{
+		grid-column: 2/3;
+		grid-row: 2/3;
+		padding-left: 10px;
+		z-index: inherit;
+	}
+	#review-heading{
+		grid-column: 4/6;
+		grid-row: 5/6;
+	}
+	#reviews-box{
+		grid-column: 4/6;
+		grid-row: 6/7;
+	}
+	#upgrades-box{
+		grid-column: 2/4;
+		grid-row: 6/7;
+	}
+	#upgrade-heading{
+		grid-column: 2/4;
+		grid-row: 5/6;
+	}
+	main img{
+	grid-column: 1/6;
+	grid-row: 2/5;
+	z-index: 1;
+	}
+	main button{
+		grid-column: 2/3;
+		grid-row: 3/4;
+		z-index: inherit;
+		padding: 10px 20px;
+		margin: 5px 10px;
+	}
 }

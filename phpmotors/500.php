@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>PHP Motors Template</title>
+    <title>PHP Motors Server Error</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,8 +14,11 @@ include('structure/nav.php');
 
 ?>
 
-<main id="#main-grid">
-        <h1>Content Title Here</h1>
+<main>
+        <h1>Server Error</h1>
+		<p>
+		Sorry, our server seems to be experiencing some technical difficulties. 
+		</p>
 </main>
 
 <?php
