@@ -42,6 +42,10 @@ nav li{
 nav ul{
 	padding: 0px;
 }
+#nav_active{
+	text-decoration: underline;
+	text-decoration-color: #ffffff;
+}
 
 #car-box{
 	color: #1C507d;
@@ -111,7 +115,9 @@ main img{
 	background-color: #4c96d7;
 	height: 100px;
 }
-
+form label,input{
+	display: block;
+}
 
 
 

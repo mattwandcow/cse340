@@ -9,6 +9,7 @@
 
 <body>
 <?php
+include('structure/connect.php');
 include('structure/header.php');
 include('structure/nav.php');
 
