@@ -36,7 +36,7 @@ switch($action)
 		$target_view='../view/add-vehicle.php';
 		break;
 	case 'addVehicle':
-		var_dump($_POST);
+		//var_dump($_POST);
 		$carMake  = filter_input(INPUT_POST, 'log_make');
 		$carModel = filter_input(INPUT_POST, 'log_model');
 		$carDesc  = filter_input(INPUT_POST, 'log_desc');
