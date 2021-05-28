@@ -1,8 +1,11 @@
 <?php
 /* PHP Motor Home */
 //includes
-	include('structure/connect.php');
-
+$depth=0;
+if ($depth==0)
+	$depth_str="";
+else
+	$depth_str="../";
 //Pulls action from POST or GET. Defaults to POST if Both are valid
 	$action = filter_input(INPUT_POST,'action');
 	if($action == NULL)
@@ -19,34 +22,9 @@ switch($action)
 		break;
 
 	default:
-		$page_title='PHP Motors Hime';
+		$page_title='PHP Motors Home';
 		$target_view='view/pm_home.php';
 }
 	
-?>
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <title><?php echo $page_title;?></title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<?php
-include('structure/header.php');
-include('structure/nav.php');
-
-?>
-<main id="#main-grid">
-<?php
 include($target_view);
 ?>
-</main>
-
-<?php
-include('structure/footer.php');
-
-?>
-</body>
-
-</html>

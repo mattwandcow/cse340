@@ -115,7 +115,7 @@ main img{
 	background-color: #4c96d7;
 	height: 100px;
 }
-form label,input{
+form label,input,textarea,select{
 	display: block;
 }
 

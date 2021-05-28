@@ -5,7 +5,7 @@
 function getClassifications()
 {
 	$db = createConnection();
-	$sql = 'SELECT classificationName FROM carclassification ORDER BY classificationName ASC';
+	$sql = 'SELECT classificationName, classificationID as cNum FROM carclassification ORDER BY classificationName ASC';
 	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	$classifications = $stmt->fetchAll();

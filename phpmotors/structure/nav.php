@@ -1,11 +1,12 @@
 <?php
 //includes
-	require('model/main-model.php');
+	require_once('connect.php');
+	require_once($depth_str.'model/main-model.php');
 	$class=getClassifications();
 ?>
 <nav>
 <ul>
-<li><a href='../phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>
+<li><a href='<?php echo $depth_str;?>index.php' title='View the PHP Motors home page'>Home</a></li>
 <?php
 foreach ($class as $c)
 {

@@ -1,7 +1,15 @@
 <?php
 /* PHP Motors Accounts */
+
+//Cheap folder depth hack
+$depth=1;
+if ($depth==0)
+	$depth_str="";
+else
+	$depth_str="../";
+
 //includes
-	include('../structure/connect.php');
+require_once('../model/accounts-model.php');
 
 //Pulls action from POST or GET. Defaults to POST if Both are valid
 	$action = filter_input(INPUT_POST,'action');
@@ -24,37 +32,34 @@ switch($action)
 		break;
 	case 'register':
 		$page_title='Account Registration';
+		$clientFirstname = filter_input(INPUT_POST, 'log_fname');
+		$clientLastname = filter_input(INPUT_POST, 'log_lname');
+		$clientEmail = filter_input(INPUT_POST, 'log_email');
+		$clientPassword = filter_input(INPUT_POST, 'log_pass');
+		if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword))
+		{
+			$message = '<p>Please provide information for all empty form fields.</p>';
+			include '../view/registration.php';
+			exit; 
+		}
+		$regOutcome = regClient($clientFirstname,$clientLastname,$clientEmail,$clientPassword);
+		if($regOutcome)
+		{
+			$message="<p>Account Registered. Please Log in.</p>";
+			$target_view='../view/login.php';
+		}
+		else
+			$message="<p>Registration Failed. Please try again.</p>";
+		break;
+	case 'registration':
+		$page_title='Account Registration';
 		$target_view='../view/registration.php';
 		break;
 
 	default:
-		//echo "default";
+		$page_title='Accounts Page';
+		$target_view='../view/pm_home.php';
+		break;
 }
-	
-?>
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <title><?php echo $page_title;?></title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-<?php
-include('structure/header.php');
-include('structure/nav.php');
-
-?>
-<main id="#main-grid">
-<?php
 include($target_view);
 ?>
-</main>
-
-<?php
-include('../structure/footer.php');
-
-?>
-</body>
-
-</html>

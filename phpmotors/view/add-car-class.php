@@ -13,24 +13,21 @@ include($depth_str.'structure/nav.php');
 ?>
 <main id="#main-grid">
 <fieldset>
+<h2>New Car Class</h2>
+<fieldset>
 <?php
 	echo $message;
 ?>
-<h2>Sign in</h2>
-<fieldset>
-<form action='' method='post'>
+<form action='index.php' method='post'>
 <label>
-	Email Address
-	<input type='text' name='log_email' value=''>
+	Car Class
+	<input type='text' name='log_cclass' value='' required>
 </label>
-<label>
-	Password
-	<input type='text' name='log_pass' value=''>
-</label>
-<input type='submit' value='Login'>
+	<input type='submit' value='Add Car Class'>
+	<input type='hidden' name='action' value='newCarClass'>
 </form>
 </fieldset>
-No account? <a href='?action=registration'>Register one today!</a>
+Already have an account? <a href='?action=login'>Sign in</a>
 </fieldset>
 </main>
 
