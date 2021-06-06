@@ -21,13 +21,15 @@ include($depth_str.'structure/nav.php');
 <form action='' method='post'>
 <label>
 	Email Address
-	<input type='text' name='log_email' value=''>
+	<input type='email' name='log_email' value=''>
 </label>
 <label>
 	Password
-	<input type='text' name='log_pass' value=''>
+	<input type='password' name='log_pass' value='' pattern='(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' required>
+	<span>Make sure the password is at least 8 characters and has at least 1 uppercase character, 1 number and 1 special character. </span>
 </label>
 <input type='submit' value='Login'>
+<input type='hidden' name='action' value='Logon'>
 </form>
 </fieldset>
 No account? <a href='?action=registration'>Register one today!</a>

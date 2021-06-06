@@ -21,19 +21,20 @@ include($depth_str.'structure/nav.php');
 <form action='index.php' method='post'>
 <label>
 	First Name
-	<input type='text' name='log_fname' value='' required>
+	<input type='text' name='log_fname' value='<?php if($sticky) echo $clientFirstname; ?>' required>
 </label>
 <label>
 	Last Name
-	<input type='text' name='log_lname' value='' required>
+	<input type='text' name='log_lname' value='<?php if($sticky) echo $clientFirstname; ?>' required>
 </label>
 <label>
 	Email Address
-	<input type='text' name='log_email' value='' required>
+	<input type='email' name='log_email' value='<?php if($sticky) echo $clientEmail; ?>' required>
 </label>
 <label>
 	Password
-	<input type='text' name='log_pass' value='' required>
+	<input type='password' name='log_pass' value='' pattern='(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' required>
+	<span>Make sure the password is at least 8 characters and has at least 1 uppercase character, 1 number and 1 special character. </span>
 </label>
 	<input type='submit' value='Register Account'>
 	<input type='hidden' name='action' value='register'>

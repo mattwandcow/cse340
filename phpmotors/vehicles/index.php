@@ -2,6 +2,7 @@
 /* PHP Motors Accounts */
 
 require_once('../structure/connect.php');
+require_once('../structure/functions.php');
 require_once('../model/main-model.php');
 require_once('../model/vehicles-model.php');
 
@@ -37,14 +38,15 @@ switch($action)
 		break;
 	case 'addVehicle':
 		//var_dump($_POST);
-		$carMake  = filter_input(INPUT_POST, 'log_make');
-		$carModel = filter_input(INPUT_POST, 'log_model');
-		$carDesc  = filter_input(INPUT_POST, 'log_desc');
-		$carImage = filter_input(INPUT_POST, 'log_img');
-		$carPrice = filter_input(INPUT_POST, 'log_price');
-		$carStock = filter_input(INPUT_POST, 'log_count');
-		$carColor = filter_input(INPUT_POST, 'log_color');
-		$carClass = filter_input(INPUT_POST, 'log_carClass');
+		$sticky=true;
+		$carMake  = trim(filter_input(INPUT_POST, 'log_make'));
+		$carModel = trim(filter_input(INPUT_POST, 'log_model'));
+		$carDesc  = trim(filter_input(INPUT_POST, 'log_desc'));
+		$carImage = trim(filter_input(INPUT_POST, 'log_img'));
+		$carPrice = trim(filter_input(INPUT_POST, 'log_price'));
+		$carStock = trim(filter_input(INPUT_POST, 'log_count'));
+		$carColor = trim(filter_input(INPUT_POST, 'log_color'));
+		$carClass = trim(filter_input(INPUT_POST, 'log_carClass'));
 		if(empty($carMake)||empty($carModel)||empty($carDesc)||empty($carImage)||empty($carPrice)||empty($carStock)||empty($carColor)||empty($carClass))
 		{
 			$message = '<p>Please provide information for all empty form fields.</p>';
@@ -54,6 +56,7 @@ switch($action)
 		$regOutcome = insertVehicleItem($carMake, $carModel, $carDesc, "/phpmotors/images/no-image.jpg", $carPrice, $carStock, $carColor, $carClass);
 		if($regOutcome==1)
 		{
+			$sticky=false;
 			$message="<p>New Vehicle Added.</p>";
 			include '../view/add-vehicle.php';
 			exit();

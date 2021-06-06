@@ -21,32 +21,33 @@ require_once('../model/main-model.php');
 <form action='index.php' method='post'>
 <label>
 	Make
-	<input type='text' name='log_make' value='' required>
+	<input type='text' name='log_make' value='<?php if($sticky) echo $carMake; ?>' required>
 </label>
 <label>
 	Model
-	<input type='text' name='log_model' value='' required>
+	<input type='text' name='log_model' value='<?php if($sticky) echo $carModel; ?>' required>
 </label>
 <label>
 	Description
 	<textarea name='log_desc'>
+	<?php if($sticky) echo $carDesc;?>
 	</textarea>
 </label>
 <label>
 	Image
-	<input type='text' name='log_img' value='' required>
+	<input type='text' name='log_img' value='<?php if($sticky) echo $carImage; ?>' required>
 </label>
 <label>
 	Price
-	<input type='text' name='log_price' value='' required>
+	<input type='text' name='log_price' value='<?php if($sticky) echo $carPrice; ?>' required>
 </label>
 <label>
 	Number in Stock
-	<input type='number' min="0" name='log_count' value='' required>
+	<input type='number' min="0" name='log_count' value='<?php if($sticky) echo $carStock; ?>' required>
 </label>
 <label>
 	Color
-	<input type='text' name='log_color' value='' required>
+	<input type='text' name='log_color' value='<?php if($sticky) echo $carColor; ?>' required>
 </label>
 <label>
 	Car Classification
@@ -56,7 +57,10 @@ require_once('../model/main-model.php');
 	//var_dump($carClass_list);
 	foreach ($carClass_list as $ccl)
 	{
-		echo "\t<option value=\"".$ccl['cNum']."\">".$ccl['classificationName']."</option>\n";
+		if($sticky && $ccl['cNum']==$carClass)
+			echo "\t<option value=\"".$ccl['cNum']."\" selected>".$ccl['classificationName']."</option>\n";
+		else
+			echo "\t<option value=\"".$ccl['cNum']."\">".$ccl['classificationName']."</option>\n";
 	}
 ?>
 	</select>
