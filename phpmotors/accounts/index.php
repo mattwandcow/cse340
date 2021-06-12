@@ -8,6 +8,10 @@ if ($depth==0)
 else
 	$depth_str="../";
 
+//Start Session
+session_start();
+
+$message=$_SESSION['message'];
 //includes
 require_once('../model/accounts-model.php');
 require_once('../structure/functions.php');
@@ -20,11 +24,20 @@ require_once('../structure/functions.php');
 	}
 	$page_title='PHP Motors Home';
 	$target_view='';
+	
+// looks for cookies
+	if(isset($_COOKIE['firstname']))
+		$cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
 switch($action)
 {
 	case '500':
 		$page_title='Server Error';
 		$target_view='../view/500.php';
+		break;
+	case 'admin':
+		//echo 'admin case';
+		$page_title='Admin Page';
+		$target_view='../view/admin.php';
 		break;
 	case 'account':
 	case 'login':
@@ -39,6 +52,13 @@ switch($action)
 		$clientEmail = trim(filter_input(INPUT_POST, 'log_email'));
 		$clientPassword = trim(filter_input(INPUT_POST, 'log_pass'));
 		
+		// check for email already in client list
+		if(checkExistingEmail($clientEmail))
+		{
+			$message = '<p>Email already Registered. Why not login instead?</p>';
+			include '../view/login.php';
+			exit; 			
+		}
 		$checkEmail = checkEmail($clientEmail);
 		$checkPassword = checkPassword($clientPassword);
 		if(empty($clientFirstname) || empty($clientLastname) || empty($checkEmail) || empty($checkPassword))
@@ -53,8 +73,9 @@ switch($action)
 		if($regOutcome)
 		{
 			$stick=false;
-			$message="<p>Account Registered. Please Log in.</p>";
-			$target_view='../view/login.php';
+			$message="<p>Thank you for Registering, $clientFirstname. Please Log in.</p>";
+			$_SESSION['message']=$message;
+			header('Location: ?action=login');
 		}
 		else
 			$message="<p>Registration Failed. Please try again.</p>";
@@ -67,26 +88,38 @@ switch($action)
 		$sticky=true;
 		$clientEmail = trim(filter_input(INPUT_POST, 'log_email'));
 		$clientPassword = trim(filter_input(INPUT_POST, 'log_pass'));
+		
 		$checkEmail = checkEmail($clientEmail);
 		$checkPassword = checkPassword($clientPassword);
+		
 		if(empty($checkEmail) || empty($checkPassword))
 		{
 			$message = '<p>Please provide information for all empty form fields.</p>';
 			$target_view='../view/login.php';
+			exit;
 		}
-		//$logOutcome = regClient($clientFirstname,$clientLastname,$clientEmail,$clientPassword);
-		// if($logOutcome)
-		// {
-			// $stick=false;
-			// $message="<p>Account Registered. Please Log in.</p>";
-			// $target_view='../view/login.php';
-		// }
-		else
-			// $message="<p>Registration Failed. Please try again.</p>";
+		
+		$clientData = getClient($clientEmail);
+		
+		if(!password_verify($clientPassword, $clientData['clientPassword']))
 		{
-			$message="<p>Logged In!.</p>";
+			$message = '<p>Please check Username and Password.</p>';
 			$target_view='../view/login.php';
+			exit;
 		}
+		
+		$_SESSION['loggedin']=True;
+		
+		//remove hashed psasword from client data array
+		array_pop($clientData);
+		
+		$_SESSION['clientData']=$clientData;
+		$target_view='../view/admin.php';
+		break;
+	case 'logout':
+		session_unset();
+		session_destroy();
+		header("Location: ../");
 		break;
 	default:
 		$page_title='Accounts Page';

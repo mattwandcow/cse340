@@ -25,6 +25,9 @@ include($depth_str.'structure/nav.php');
 	<a href='<?php echo $depth_str;?>accounts/?action=register'>Register page</a>
 </li>
 <li>
+	<a href='<?php echo $depth_str;?>accounts/?action=admin'>Admin page</a>
+</li>
+<li>
 	<a href='<?php echo $depth_str;?>vehicles/'>Vehicles page</a>
 </li>
 </ul>

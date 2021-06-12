@@ -14,6 +14,9 @@ else
 	$depth_str="../";
 
 
+//Start Session
+session_start();
+
 //Pulls action from POST or GET. Defaults to POST if Both are valid
 	$action = filter_input(INPUT_POST,'action');
 	if($action == NULL)

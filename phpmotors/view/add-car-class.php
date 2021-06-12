@@ -1,3 +1,10 @@
+<?php
+if(!($_SESSION['loggedin'] && $_SESSION['clientData']['clientLevel']==3))
+{
+	header("Location: ../");
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -27,7 +34,6 @@ include($depth_str.'structure/nav.php');
 	<input type='hidden' name='action' value='newCarClass'>
 </form>
 </fieldset>
-Already have an account? <a href='?action=login'>Sign in</a>
 </fieldset>
 </main>
 

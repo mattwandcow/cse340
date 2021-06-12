@@ -1,3 +1,10 @@
+<?php
+if(!($_SESSION['loggedin'] && $_SESSION['clientData']['clientLevel']==3))
+{
+	header("Location: ../");
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -69,7 +76,6 @@ require_once('../model/main-model.php');
 	<input type='hidden' name='action' value='addVehicle'>
 </form>
 </fieldset>
-Already have an account? <a href='?action=login'>Sign in</a>
 </fieldset>
 </main>
 
