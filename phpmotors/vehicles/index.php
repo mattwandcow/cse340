@@ -1,5 +1,5 @@
 <?php
-/* PHP Motors Accounts */
+/* PHP Motors Vehicle */
 
 require_once('../structure/connect.php');
 require_once('../structure/functions.php');
@@ -71,12 +71,19 @@ switch($action)
 			exit();
 		}
 		break;
+	case 'getInventoryItems':
+		$classificationId = filter_input(INPUT_GET, 'classificationId', FILTER_SANITIZE_NUMBER_INT); 
+		// Fetch the vehicles by classificationId from the DB 
+		$inventoryArray = getInventoryByClassification($classificationId); 
+		// Convert the array to a JSON object and send it back 
+		echo json_encode($inventoryArray); 
+		break;
 	case 'newCarClass':
 		$carClass = filter_input(INPUT_POST, 'log_cclass');
 		if(empty($carClass))
 		{
 			$message = '<p>Please provide information for all empty form fields.</p>';
-			include '../view/add-car-class.php';
+			include('../view/add-car-class.php');
 			exit; 
 		}
 		$regOutcome =insertCarclass($carClass);
@@ -91,7 +98,51 @@ switch($action)
 			$message="<p>Registration Failed. Please try again.</p>";
 		}
 		break;
-
+		
+	case 'mod':
+		$invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+		$invInfo = getInvItemInfo($invId);
+		if(count($invInfo)<1)
+		{
+			$message = 'Sorry, no vehicle information could be found.';
+		}
+		$target_view= '../view/vehicle-update.php';
+		break;
+	case 'updateVehicle':
+		$classificationId = filter_input(INPUT_POST, 'log_carClass', FILTER_SANITIZE_NUMBER_INT);
+		$invMake = filter_input(INPUT_POST, 'log_make', FILTER_SANITIZE_STRING);
+		$invModel = filter_input(INPUT_POST, 'log_model', FILTER_SANITIZE_STRING);
+		$invDescription = filter_input(INPUT_POST, 'log_desc', FILTER_SANITIZE_STRING);
+		$invImage = filter_input(INPUT_POST, 'log_img', FILTER_SANITIZE_STRING);
+		$invThumbnail = filter_input(INPUT_POST, 'log_thm', FILTER_SANITIZE_STRING);
+		$invPrice = filter_input(INPUT_POST, 'log_price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+		$invStock = filter_input(INPUT_POST, 'log_count', FILTER_SANITIZE_NUMBER_INT);
+		$invColor = filter_input(INPUT_POST, 'log_color', FILTER_SANITIZE_STRING);
+		$invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+		
+		if (empty($invId)) 
+		{
+			$message = '<p>Invalid Id Error.</p>';
+			$target_view=  '../view/vehicle-update.php';
+			exit;
+		}
+		if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) 
+		{
+			$message = '<p>Incomplete Details Error.</p>';
+			$include=  '../view/vehicle-update.php';
+			exit;
+		}
+		$updateResult = updateInvItemInfo($invId, $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId);
+		if ($updateResult) {
+			$message = "<p>Congratulations, changes successfully updated.</p>";
+			include '../view/vehicle-update.php';
+			exit;
+		} else {
+			$message = "<p>Error. The vehicle was not updated.</p>";
+			include '../view/vehicle-update.php';
+			exit;
+		}
+		break;
 	default:
 		$page_title='Vehicles Page';
 		$target_view='../view/vehicle-management.php';

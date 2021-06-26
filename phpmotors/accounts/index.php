@@ -12,6 +12,7 @@ else
 session_start();
 
 $message=$_SESSION['message'];
+$_SESSION['message']='';
 //includes
 require_once('../model/accounts-model.php');
 require_once('../structure/functions.php');
@@ -102,9 +103,11 @@ switch($action)
 		$clientData = getClient($clientEmail);
 		
 		if(!password_verify($clientPassword, $clientData['clientPassword']))
+		//if($clientPassword!=$clientData['clientPassword']) //Swap the comments on these two lines to bypass the hash, and be a plaintext offender. NOT FOR PROD!!
 		{
+			//echo "Here";
 			$message = '<p>Please check Username and Password.</p>';
-			$target_view='../view/login.php';
+			include('../view/login.php');
 			exit;
 		}
 		
@@ -120,6 +123,94 @@ switch($action)
 		session_unset();
 		session_destroy();
 		header("Location: ../");
+		break;
+	case 'update-acc':
+		$clientFirstname = trim(filter_input(INPUT_POST, 'log_fname'));
+		$clientLastname = trim(filter_input(INPUT_POST, 'log_lname'));
+		$clientEmail = trim(filter_input(INPUT_POST, 'log_email'));
+		$accID = trim(filter_input(INPUT_POST, 'accID'));
+		
+		$checkEmail = checkEmail($clientEmail);
+		
+		if(empty($checkEmail))
+		{
+			$message="Error: Improper Email Format. $clientEmail is invalid.";
+			include '../view/acc-update.php';
+			exit();
+		}
+		
+		
+		if(empty($clientFirstname) || empty($clientLastname) || empty($checkEmail))
+		{
+			$message="Error: All Spaces must be filled in";
+			include '../view/acc-update.php';
+			exit();
+		}
+		
+		$oldEmail=$_SESSION['clientData']['clientEmail'];
+		$email_switch=strcmp($oldEmail,$checkEmail);
+		if($email_switch==0)
+		{
+			$existingEmail = checkExistingEmail($checkEmail);
+			if(empty($existingEmail))
+			{
+				$message="Error: Email already exists. $oldEmail, $checkEmail = ";
+				include '../view/acc-update.php';
+				exit();
+			}
+		}
+		
+		$accUpdate=updateClientAccount($accID, $clientFirstname,$clientLastname,$checkEmail);
+		
+		if($accUpdate)
+		{
+			$message="<p>Information Updated.</p>";
+			$_SESSION['message']=$message;
+			$_SESSION['clientData']=getClientbyID($accID);
+			header('Location: ?action=admin');
+			exit();
+		}
+		else
+		{
+			$message="<p>No details changed.</p>";
+			include '../view/acc-update.php';
+			exit();
+		}
+		$page_title='Account Update';
+		$target_view='../view/acc-update.php';
+		break;
+	case 'accUpdate':
+		$clientFirstname = $_SESSION['clientData']['clientFirstname'];
+		$clientLastname = $_SESSION['clientData']['clientLastname'];
+		$clientEmail = $_SESSION['clientData']['clientEmail'];
+		$accID = $_SESSION['clientData']['clientId'];
+		$target_view='../view/acc-update.php';
+		break;
+	case 'update-pass':
+		$clientPassword = trim(filter_input(INPUT_POST, 'log_npass'));
+		$accID = trim(filter_input(INPUT_POST, 'accID'));
+		$checkPassword = checkPassword($clientPassword);
+		if(empty($checkPassword))
+		{
+			$message = '<p>Invalid Password.</p>';
+			include '../view/registration.php';
+			exit; 
+		}
+		$hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+		$regOutcome = updatePassword($accID, $hashedPassword);
+		if($regOutcome)
+		{
+			$message="<p>Password Update</p>";
+			$_SESSION['message']=$message;
+			header('Location: ?action=admin');
+			exit();
+		}
+		else
+		{
+			$message="<p>No details changed.</p>";
+			include '../view/acc-update.php';
+			exit();
+		}
 		break;
 	default:
 		$page_title='Accounts Page';

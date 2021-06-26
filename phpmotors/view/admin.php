@@ -22,15 +22,21 @@ include('../structure/nav.php');
 ?>
 
 <main id="#main-grid">
-        <h1>Data for logged in user</h1>
+<?php 
+	echo $message;
+?>
+	<h1>Data for logged in user</h1>
+		<p>You are logged in</p>
 		<p>First name: <span><?php echo $_SESSION['clientData']['clientFirstname'];?></span></p>
 		<p>Last name: <span><?php echo $_SESSION['clientData']['clientLastname'];?></span></p>
 		<p>Email: <span><?php echo $_SESSION['clientData']['clientEmail'];?></span></p>
-		<?php
-			if($_SESSION['clientData']['clientLevel']==3)
+		<p><a href='?action=accUpdate'>Update Account Information</a></p>
+				<?php
+			if($_SESSION['clientData']['clientLevel']>1)
 			{
 		?>
-			<p><a href="<?php echo $depth_str;?>vehicles/">Vehicle Page</a></p>
+		<h2>Admin Pages</h2>
+			<p><a href="<?php echo $depth_str;?>vehicles/">Vehicle Inventory Management</a></p>
 		<?php
 			}
 		?>

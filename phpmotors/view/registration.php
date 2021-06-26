@@ -1,3 +1,10 @@
+<?php
+if(!$_SESSION['loggedin'])
+{
+	header("Location: ../");
+	exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>

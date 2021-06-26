@@ -6,7 +6,6 @@ require_once('../structure/connect.php');
 function regClient($fname, $lname, $email, $pass)
 {
 	$db = createConnection();
-	
 	$sql = 'INSERT INTO clients (clientFirstname, clientLastname, clientEmail, clientPassword) VALUES (:cFname, :cLname, :cEmail, :cPass)';
 	
 	$stmt = $db->prepare($sql);
@@ -49,6 +48,63 @@ function getClient($clientEmail)
 	$clientData = $stmt->fetch(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 	return $clientData;
+}
+
+function getClientByID($accID)
+{
+	$db = createConnection();
+	$sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel FROM clients WHERE clientId = :accID';
+	$stmt = $db->prepare($sql);
+	$stmt->bindValue(':accID', $accID, PDO::PARAM_STR);
+	$stmt->execute();
+	$clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $clientData;
+}
+
+function updateClientAccount($cID, $cFirst, $cLast, $cEmail)
+{
+	
+	$db = createConnection();
+	
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = 'UPDATE clients SET clientFirstname=:cFname, clientLastname=:cLname, clientEmail=:cEmail WHERE clientID=:cID';
+	
+	$stmt = $db->prepare($sql);
+	
+	$stmt->bindValue(':cFname',$cFirst, PDO::PARAM_STR);
+	$stmt->bindValue(':cLname',$cLast, PDO::PARAM_STR);
+	$stmt->bindValue(':cEmail',$cEmail, PDO::PARAM_STR);
+	$stmt->bindValue(':cID',$cID, PDO::PARAM_STR);
+	
+	$stmt->execute();
+	
+	$rowsChanges = $stmt->rowCount();
+
+	$stmt->closeCursor();
+	
+	return $rowsChanges;
+}
+function updatePassword($cID, $nPass)
+{
+	
+	$db = createConnection();
+	
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = 'UPDATE clients SET clientPassword=:cPass WHERE clientID=:cID';
+	
+	$stmt = $db->prepare($sql);
+	
+	$stmt->bindValue(':cPass', $nPass, PDO::PARAM_STR);
+	$stmt->bindValue(':cID',$cID, PDO::PARAM_STR);
+	
+	$stmt->execute();
+	
+	$rowsChanges = $stmt->rowCount();
+
+	$stmt->closeCursor();
+	
+	return $rowsChanges;
 }
 
 ?>
