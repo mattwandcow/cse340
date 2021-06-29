@@ -12,7 +12,7 @@ foreach ($class as $c)
 {
 	echo "<li";
 	if($action==$c['classificationName']) echo " id='nav_active'";
-	echo "><a href='../phpmotors/index.php?action=".urlencode($c['classificationName'])."' title='View our ".$c['classificationName']." page'>".$c['classificationName']."</a></li>\n";
+	echo "><a href='".$depth_str."../phpmotors/vehicles/?action=classification&class=".urlencode($c['classificationName'])."' title='View our ".$c['classificationName']." page'>".$c['classificationName']."</a></li>\n";
 }
 ?>
 </ul>

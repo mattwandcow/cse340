@@ -103,7 +103,7 @@ switch($action)
 		$clientData = getClient($clientEmail);
 		
 		if(!password_verify($clientPassword, $clientData['clientPassword']))
-		//if($clientPassword!=$clientData['clientPassword']) //Swap the comments on these two lines to bypass the hash, and be a plaintext offender. NOT FOR PROD!!
+		//if($clientPassword!=$clientData['clientPassword']) //Swap the comments on these two lines to bypass the hash, and be a plaintext offender. 
 		{
 			//echo "Here";
 			$message = '<p>Please check Username and Password.</p>';

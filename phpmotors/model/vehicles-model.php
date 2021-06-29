@@ -72,4 +72,16 @@ function updateInvItemInfo($cID, $cMake, $cModel, $cDesc, $cImg, $cThm, $cPrice,
 	$stmt->closeCursor();
 	return $rowsChanged;
 }
+function getVehiclesByClass($class)
+{
+	$db = createConnection();
+	$sql = 'SELECT * FROM `inventory` WHERE classificationId=(SELECT classificationId FROM carclassification where classificationName=:cclass)';
+	$stmt = $db->prepare($sql);
+	$stmt->bindValue(':cclass',$class, PDO::PARAM_STR);
+	$stmt->execute();
+	$vehicle_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $vehicle_list;
+
+}
 ?>
