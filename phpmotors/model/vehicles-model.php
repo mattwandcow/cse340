@@ -39,11 +39,22 @@ function insertVehicleItem($cMake, $cModel, $cDesc, $cImg, $cPrice, $cStock, $cC
 function getInvItemInfo($invId)
 {
 	$db = createConnection();
-	$sql = 'SELECT * FROM inventory WHERE invId = :invId';
+	$sql = "SELECT i.invId as invId, i.invMake as invMake, i.invModel as invModel, i.invPrice as invPrice, i.invStock as invStock, i.invColor as invColor, i.invDescription as invDescription, j.imgPath as invImage FROM inventory i inner join images j on i.invId = j.invId WHERE i.invId = :invId and j.imgName NOT LIKE '%-tn.%' AND j.imgPrimary=1";
 	$stmt = $db->prepare($sql);
 	$stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
 	$stmt->execute();
 	$invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $invInfo;
+}
+function getSecondaryImages($invId)
+{
+	$db = createConnection();
+	$sql = "SELECT imgPath as invImage FROM images WHERE invId = :invId and imgName LIKE '%-tn.%' AND imgPrimary=0";
+	$stmt = $db->prepare($sql);
+	$stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+	$stmt->execute();
+	$invInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 	return $invInfo;
 }
@@ -75,13 +86,22 @@ function updateInvItemInfo($cID, $cMake, $cModel, $cDesc, $cImg, $cThm, $cPrice,
 function getVehiclesByClass($class)
 {
 	$db = createConnection();
-	$sql = 'SELECT * FROM `inventory` WHERE classificationId=(SELECT classificationId FROM carclassification where classificationName=:cclass)';
+	$sql = 'SELECT j.imgPath AS invThumbnail, i.invId as invId, i.invMake as invMake, i.invModel as invModel, i.invPrice as invPrice FROM inventory i INNER JOIN images j ON j.invId=i.invId WHERE classificationId=(SELECT classificationId FROM carclassification where classificationName=:cclass) AND j.imgName like \'%-tn.%\' and j.imgPrimary=1';
 	$stmt = $db->prepare($sql);
 	$stmt->bindValue(':cclass',$class, PDO::PARAM_STR);
 	$stmt->execute();
 	$vehicle_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 	return $vehicle_list;
-
+}
+function getVehicles()
+{
+	$db = createConnection();
+	$sql = 'SELECT invId, invMake, invModel FROM `inventory`';
+	$stmt = $db->prepare($sql);
+	$stmt->execute();
+	$vehicle_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $vehicle_list;
 }
 ?>

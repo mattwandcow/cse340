@@ -37,6 +37,7 @@ include('../structure/nav.php');
 		?>
 		<h2>Admin Pages</h2>
 			<p><a href="<?php echo $depth_str;?>vehicles/">Vehicle Inventory Management</a></p>
+			<p><a href="<?php echo $depth_str;?>uploads/?action=upload">Vehicle Image Management</a></p>
 		<?php
 			}
 		?>

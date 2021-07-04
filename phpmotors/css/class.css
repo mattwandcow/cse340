@@ -11,7 +11,10 @@ html{
  display: flex;
  flex-direction: column;
 }
-
+	#detail-grid{
+	display: flex;
+	flex-direction: column;
+}
 #inv-display li{
  margin-bottom: .5em;
  border: 1px #ccc solid;
@@ -26,10 +29,15 @@ html{
 #car_img{
 	padding: 5px;
 	margin: 0;
+	order: 1;
 }
-
+#car_thms
+{
+	order: 2;
+}
 aside {
 	padding: 7px;
+	order: 3;
 }
 aside p{
 	border-bottom: 1px solid grey;
@@ -85,5 +93,19 @@ aside p{
 
 aside p:last-child{
 	border-bottom: none;
+}
+.img-thumbs{
+	display: none;
+}
+.car_thm:hover {
+	transform: scale(1.5);
+}
+#car_thms
+{
+	order: 1;
+}
+#car_img
+{
+	order: 2;
 }
 }

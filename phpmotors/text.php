@@ -1,7 +1,13 @@
 <pre>
 <?php
-include('structure/connect.php');
-include('model/main-model.php');
-echo buildClassifiicationList(getClassifications());
+require_once('structure/connect.php');
+include('model/vehicles-model.php');
+echo $_SERVER['DOCUMENT_ROOT'];
+echo "<br>";
+echo realpath('text.php');
+echo "<br>";
+print_r(getVehiclesByClass("Classic"));
+
+
 ?>
 </pre>
