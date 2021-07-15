@@ -6,6 +6,7 @@
     <title><?php echo $page_title;?></title>
     <link rel="stylesheet" href="<?php echo $depth_str;?>css/style.css">
     <link rel="stylesheet" href="<?php echo $depth_str;?>css/class.css">
+    <link rel="stylesheet" href="<?php echo $depth_str;?>css/review.css">
 </head>
 
 <body>
@@ -20,6 +21,7 @@ echo $vehicle_details;
 <hr>
 <section>
 <?php
+echo $message;
 echo $vehicle_reviews;
 ?>
 </section>

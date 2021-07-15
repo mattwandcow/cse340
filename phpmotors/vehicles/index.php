@@ -17,7 +17,8 @@ else
 
 //Start Session
 session_start();
-
+$message=$_SESSION['message'];
+$_SESSION['message']='';
 //Pulls action from POST or GET. Defaults to POST if Both are valid
 	$action = filter_input(INPUT_POST,'action');
 	if($action == NULL)

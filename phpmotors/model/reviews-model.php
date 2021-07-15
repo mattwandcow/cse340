@@ -121,8 +121,8 @@ function createReviewsString($invId)
 		foreach ($reviewList as $review)
 		{
 			$resultStr.="<div>\n";
-			$resultStr.="<p><span>".getScreenName($review['clientId'])."</span> wrote on ".$review['reviewDate']."</p>\n";
-			$resultStr.="<p>".$review['reviewText']."</p>\n";
+			$resultStr.="<p><span class='screen_name'>".getScreenName($review['clientId'])."</span> wrote on ".$review['reviewDate']."</p>\n";
+			$resultStr.="<p class='review'>".$review['reviewText']."</p>\n";
 			$resultStr.="</div>";
 		}
 		if($_SESSION['loggedin'])
@@ -136,7 +136,7 @@ function createReviewsString($invId)
 function generateReviews($uId)
 {
 	$reviewList = getReviewsByUser($uId);
-	$resultStr="";
+	$resultStr="<section>\n";
 	$resultStr.="<h3>Customer Reviews</h3>\n";
 	if(count($reviewList)==0)
 	{
@@ -148,11 +148,12 @@ function generateReviews($uId)
 		{
 			$resultStr.="<div>\n";
 			$resultStr.="<p>Review of <a href='../vehicles/?action=details&id=".$review['invId']."'>".$review['invMake']." ".$review['invModel']."</a> written on ".$review['reviewDate']."</p>\n";
-			$resultStr.="<p>".$review['reviewText']."</p>\n";
+			$resultStr.="<p class='review'>".$review['reviewText']."</p>\n";
 			$resultStr.="<p><a href='../reviews/?action=update&rid=".$review['reviewId']."'>Update</a> <a href='../reviews/?action=delete&rid=".$review['reviewId']."'>Delete</a></p>\n";
 			$resultStr.="</div>";
 		}
 	}
+	$resultStr.="</section>";
 	return $resultStr;
 }
 function updateReview($rID, $rText)

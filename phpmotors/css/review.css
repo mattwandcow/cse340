@@ -1,0 +1,22 @@
+section {
+	padding: 7px;
+}
+.screen_name{
+font-weight:bold;
+}
+section div{
+	border: 1px black solid;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.review{
+	background-color: #DEDEDE;
+	padding: 17px;
+}
+
+@media (min-width: 500px){
+section {
+	padding: 7px;
+	width: 400px;
+}
+}

@@ -38,6 +38,7 @@ switch($action)
 			$message = '<p>Please provide information for all empty form fields.</p>';
 			$_SESSION['message']=$message;
 			header('Location: ../vehicles/?action=details&id='.$revInv);
+			exit();
 		}
 		$result=reviewInsert($revText,$revInv,$revUser);
 		if($result==0)
@@ -45,12 +46,14 @@ switch($action)
 			$message="<p>Error: Review not entered</p>";
 			$_SESSION['message']=$message;
 			header('Location: ../vehicles/?action=details&id='.$revInv);
+			exit();
 		}
 		else
 		{
-			$message="<p>Error: Review entered succesfully!</p>";
+			$message="<p>Review entered succesfully!</p>";
 			$_SESSION['message']=$message;
 			header('Location: ../vehicles/?action=details&id='.$revInv);
+			exit();
 		}
 		break;
 	case 'delete':
