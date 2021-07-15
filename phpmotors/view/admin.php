@@ -44,6 +44,9 @@ include('../structure/nav.php');
 </main>
 
 <?php
+
+echo $userReviews;
+
 include('../structure/footer.php');
 
 ?>

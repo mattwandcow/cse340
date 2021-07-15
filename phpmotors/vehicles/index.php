@@ -5,6 +5,7 @@ require_once('../structure/connect.php');
 require_once('../structure/functions.php');
 require_once('../model/main-model.php');
 require_once('../model/vehicles-model.php');
+require_once('../model/reviews-model.php');
 
 //Cheap folder depth hack
 $depth=1;
@@ -161,6 +162,7 @@ switch($action)
 		$carID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 		$vehicle = getInvItemInfo($carID);
 		$vehicle_details = buildVehicleDetail($vehicle);
+		$vehicle_reviews = createReviewsString($carID);
 		$page_title="$vehicle[invMake] $vehicle[invModel]";
 		$target_view='../view/vehicle-details.php';
 		break;

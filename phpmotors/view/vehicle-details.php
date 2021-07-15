@@ -14,10 +14,18 @@ include('../structure/header.php');
 include('../structure/nav.php');
 
 echo $vehicle_details;
-?>
 
+//we're probably going to have a function called Assemble_reviews or something
+?>
+<hr>
+<section>
+<?php
+echo $vehicle_reviews;
+?>
+</section>
 
 <?php
+
 include('../structure/footer.php');
 
 ?>

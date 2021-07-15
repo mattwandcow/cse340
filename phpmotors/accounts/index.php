@@ -15,6 +15,7 @@ $message=$_SESSION['message'];
 $_SESSION['message']='';
 //includes
 require_once('../model/accounts-model.php');
+require_once('../model/reviews-model.php');
 require_once('../structure/functions.php');
 
 //Pulls action from POST or GET. Defaults to POST if Both are valid
@@ -38,6 +39,7 @@ switch($action)
 	case 'admin':
 		//echo 'admin case';
 		$page_title='Admin Page';
+		$userReviews=generateReviews($_SESSION['clientData']['clientId']);
 		$target_view='../view/admin.php';
 		break;
 	case 'account':
